@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // Include the SceneManager
+using UnityEngine.UI;  // Include the UI namespace
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;  // Speed of the player
     private int score = 0;      // Score of the player
     public int health = 5;      // Health of the player, initial value 5
+    public Text scoreText;      // Reference to the UI text element for displaying score
 
     void Start()
     {
@@ -52,8 +54,8 @@ public class PlayerController : MonoBehaviour
             // Increment the score
             score++;
 
-            // Log the new score
-            Debug.Log("Score: " + score);
+            // Update the score text UI
+            scoreText.text = "Score: " + score.ToString();
 
             // Disable the Coin object
             other.gameObject.SetActive(false);
