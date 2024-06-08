@@ -467,9 +467,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b87793874740f6847bc22df6d33f585d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapMat: {fileID: 0}
-  goalMat: {fileID: 0}
-  colorblindMode: {fileID: 0}
+  trapMat: {fileID: 2100000, guid: cc12c401449b01449b1d02ae2f37040a, type: 2}
+  goalMat: {fileID: 2100000, guid: 03137ae3f34c5e84caff45ebc6c1ee20, type: 2}
+  colorblindMode: {fileID: 1910800918}
 --- !u!1 &615610541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,4 +1758,4 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
