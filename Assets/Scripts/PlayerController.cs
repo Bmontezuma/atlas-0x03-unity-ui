@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private int score = 0;      // Score of the player
     public int health = 5;      // Health of the player, initial value 5
     public Text scoreText;      // Reference to the UI text element for displaying score
+    public Text healthText;     // Reference to the UI text element for displaying health
 
     void Start()
     {
@@ -43,6 +44,10 @@ public class PlayerController : MonoBehaviour
             // Reset health and score
             health = 5;
             score = 0;
+
+            // Update UI elements
+            SetScoreText();
+            SetHealthText();
         }
     }
 
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour
             score++;
 
             // Update the score text UI
-            scoreText.text = "Score: " + score.ToString();
+            SetScoreText();
 
             // Disable the Coin object
             other.gameObject.SetActive(false);
@@ -66,8 +71,8 @@ public class PlayerController : MonoBehaviour
             // Decrement the health
             health--;
 
-            // Log the new health
-            Debug.Log("Health: " + health);
+            // Update the health text UI
+            SetHealthText();
 
             // You can add game over logic or other consequences here
         }
@@ -79,5 +84,17 @@ public class PlayerController : MonoBehaviour
 
             // You can add additional logic for winning the game here
         }
+    }
+
+    void SetScoreText()
+    {
+        // Update the score text UI
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    void SetHealthText()
+    {
+        // Update the health text UI
+        healthText.text = "Health: " + health.ToString();
     }
 }
