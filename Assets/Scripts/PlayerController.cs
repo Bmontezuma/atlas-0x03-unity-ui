@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public int health = 5;      // Health of the player, initial value 5
     public Text scoreText;      // Reference to the UI text element for displaying score
     public Text healthText;     // Reference to the UI text element for displaying health
+    public Text winLoseText;    // Reference to the UI text element for displaying win/lose message
+    public GameObject winLoseBG; // Reference to the UI Image element for the background
 
     void Start()
     {
@@ -35,19 +37,25 @@ public class PlayerController : MonoBehaviour
         // Check if health is zero
         if (health == 0)
         {
-            // Log "Game Over!" message
-            Debug.Log("Game Over!");
+            // Display "Game Over!" message if winLoseText is assigned
+            if (winLoseText != null)
+            {
+                winLoseText.text = "Game Over!";
+                winLoseText.color = Color.white;
+            }
 
-            // Reload the scene to start again
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // Change WinLoseBG's color to red and activate it if winLoseBG is assigned
+            if (winLoseBG != null)
+            {
+                winLoseBG.GetComponent<Image>().color = Color.red;
+                winLoseBG.SetActive(true);
+            }
 
-            // Reset health and score
-            health = 5;
-            score = 0;
+            // Start coroutine to reload scene after 3 seconds
+            StartCoroutine(LoadScene(3));
 
-            // Update UI elements
-            SetScoreText();
-            SetHealthText();
+            // Comment out the Debug.Log line
+            // Debug.Log("Game Over!");
         }
     }
 
@@ -79,8 +87,25 @@ public class PlayerController : MonoBehaviour
         // Check if the object we collided with is tagged as "Goal"
         else if (other.gameObject.CompareTag("Goal"))
         {
-            // Log "You win!" message
-            Debug.Log("You win!");
+            // Display "You Win!" message if winLoseText is assigned
+            if (winLoseText != null)
+            {
+                winLoseText.text = "You Win!";
+                winLoseText.color = Color.black;
+            }
+
+            // Change WinLoseBG's color to green and activate it if winLoseBG is assigned
+            if (winLoseBG != null)
+            {
+                winLoseBG.GetComponent<Image>().color = Color.green;
+                winLoseBG.SetActive(true);
+            }
+
+            // Start coroutine to reload scene after 3 seconds
+            StartCoroutine(LoadScene(3));
+
+            // Comment out the Debug.Log line
+            // Debug.Log("You win!");
 
             // You can add additional logic for winning the game here
         }
@@ -96,5 +121,22 @@ public class PlayerController : MonoBehaviour
     {
         // Update the health text UI
         healthText.text = "Health: " + health.ToString();
+    }
+
+    IEnumerator LoadScene(float seconds)
+    {
+        // Wait for the specified number of seconds
+        yield return new WaitForSeconds(seconds);
+
+        // Reload the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // Reset health and score
+        health = 5;
+        score = 0;
+
+        // Update UI elements
+        SetScoreText();
+        SetHealthText();
     }
 }
